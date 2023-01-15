@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "205623720674",
+    "project_id": "dropshipper-d7f37",
+    "storage_bucket": "dropshipper-d7f37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205623720674:android:01dba9f5ed383f7bff3cbb",
+        "android_client_info": {
+          "package_name": "com.flutterdevowl.dropshipper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205623720674-o8g61508hnjicm8ul9c7dhqrthmdk29c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1nUevp89d5gBYHizJyZ6_Jj-g_9qjsfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205623720674-o8g61508hnjicm8ul9c7dhqrthmdk29c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
