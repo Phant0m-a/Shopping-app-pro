@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:dropshipper/pages/home/components/category_avatar.dart';
+import 'package:dropshipper/pages/home/components/my_carousal_slider.dart';
 import 'package:flutter/material.dart';
 import 'components/my_app_bar.dart';
 import 'components/my_text_controller.dart';
@@ -29,8 +30,11 @@ class HomePage extends StatelessWidget {
               hintText: 'Search',
               textController: searchController,
             ),
+            SizedBox(
+              height: 25,
+            ),
             //carousal
-            Text('not implemented yet'),
+            MyCarousalSlider(),
             //Category Avatars list horizontal
             Container(
               padding:
@@ -63,28 +67,28 @@ class HomePage extends StatelessWidget {
               color: Colors.grey,
             ),
             //Products for you
-             Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: 15.0, top: 5, bottom: 5, right: 15),
-                    child: Text(
-                      'Products for you',
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.redAccent),
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding:
+                      EdgeInsets.only(left: 15.0, top: 5, bottom: 5, right: 15),
+                  child: Text(
+                    'Products for you',
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent),
                   ),
-                ],
-              ),
-              Divider(
-                thickness: 0.5,
-                color: Colors.grey,
-              ),
+                ),
+              ],
+            ),
+            Divider(
+              thickness: 0.5,
+              color: Colors.grey,
+            ),
             // Grid
-
+            Text('grid goes here'),
           ],
         ),
       )),
