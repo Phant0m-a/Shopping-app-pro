@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../constants/styles.dart';
 import '../../../model/category/sub_category.dart';
 
@@ -14,7 +14,8 @@ class SubCatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        //TODO: add the category link here
+
+        Get.toNamed(cardItem.navigator);
 
       },
       child: Column(

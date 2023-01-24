@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import '../../constants/colors.dart';
 import '../../routes/routes.dart';
+import '../home/home_page.dart';
+import '../profile/profile.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -18,10 +20,10 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   List<Widget> tabItems = [
-    Center(child: Text('Home'),),
+    HomePage(),
     Categories(),
     Center(child: Text('about'),),
-    Center(child: Text('Profile'),),
+    Profile(),
   ];
   int? currentIndex;
 
@@ -42,24 +44,10 @@ class _BottomBarState extends State<BottomBar> {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        // drawer: Drawer(),
-        // appBar: AppBar(
-        //   title: Text(
-        //     'Home',
-        //   ),
-        // ),
         body: Column(
           children: [
             Center(
               child: tabItems[currentIndex!],
-              // ElevatedButton(
-              //   onPressed: () {
-              //     FirebaseAuth.instance.signOut().then(
-              //           (value) => Get.offAllNamed(MyRoutes.getWelcome()),
-              //         );
-              //   },
-              //   child: Text('Sign out'),
-              // ),
             ),
           ],
         ),

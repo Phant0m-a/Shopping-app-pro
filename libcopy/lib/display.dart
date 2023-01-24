@@ -18,6 +18,9 @@ class Display extends StatelessWidget {
               ButtonToNavigate('Homepage', () {
                 Get.toNamed(MyRoutes.getBottomBar());
               }),
+              ButtonToNavigate('Category Screen', () {
+                Get.toNamed(MyRoutes.getCategoryScreen());
+              }),
               ButtonToNavigate('Products', () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Products()));

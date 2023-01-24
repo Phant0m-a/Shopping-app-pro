@@ -1,19 +1,24 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/material.dart';
 import '../../../constants/images.dart';
+import '../../../model/product/product.dart';
 import '../components/product_card.dart';
 
 class ProductList extends StatelessWidget {
-  const ProductList({super.key});
+  
 
+    late Product product;
+      List productList = Product.ProductList;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       height: 800,
       child: GridView.builder(
-        physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        physics: NeverScrollableScrollPhysics() 
+        // const BouncingScrollPhysics(),
+        ,gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           // maxCrossAxisExtent:200,
           //childAspectRatio: 1.3 / 2,
           mainAxisExtent: 300,
@@ -23,7 +28,7 @@ class ProductList extends StatelessWidget {
           // mainAxisSpacing: 5,
           mainAxisSpacing: 10,
         ),
-        itemCount: 20,
+        itemCount: productList.length,
         itemBuilder: ((context, index) => GridTile(
               child: InkWell(
                 onTap: () {},
@@ -42,20 +47,7 @@ class ProductList extends StatelessWidget {
                           blurStyle: BlurStyle.outer)
                     ],
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    // child: Image.asset(
-                    //   // height: 400,
-                    //   width: 50,
-                    //   fit: BoxFit.cover,
-                    //   abdul,
-                    // ),
-                    child: ProductCard(
-                      isDevliveryFree: true,
-                      name: 'Abdul Hameed Khan',
-                      price: 16500,
-                    ),
-                  ),
+                  child:ProductCard(cardItem: productList[index],),
                 ),
               ),
             )),
@@ -63,3 +55,4 @@ class ProductList extends StatelessWidget {
     );
   }
 }
+

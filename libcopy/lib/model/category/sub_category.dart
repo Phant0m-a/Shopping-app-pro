@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/images.dart';
+import '../../routes/routes.dart';
 
 class SubCatItem {
   const SubCatItem(
@@ -16,7 +17,7 @@ List<SubCatItem> subCatItemList1 = [
   SubCatItem(
       title: 'Abdul',
       image: abdul,
-      navigator: ''),
+      navigator: MyRoutes.getCategoryScreen()),
   SubCatItem(
       title: 'Abdul',
       image: abdul,

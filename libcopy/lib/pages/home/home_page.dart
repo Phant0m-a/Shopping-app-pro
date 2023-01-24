@@ -68,20 +68,28 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 25,
             ),
-            //carousal
+            //***carousal
             // MyCarousalSlider(),
             CarouselSlider(
+            
                 items: [
-                  Image.asset('assets/images/abdul.png',),
-                  Image.asset('assets/images/abdul.png'),
-                  Image.asset('assets/images/abdul.png')
+                
+                     FittedBox(
+                      child: Image.asset(
+                        'assets/images/abdul.png',
+                      ),
+                      fit: BoxFit.contain,
+                    ),
+              
                 ],
                 options: CarouselOptions(
-                    height: 300,
+                    height: 150,
                     autoPlay: true,
                     autoPlayAnimationDuration: Duration(seconds: 1))),
-            SizedBox(height: 15,),
-            //Category Avatars list horizontal
+            SizedBox(
+              height: 15,
+            ),
+            //***Category Avatars list horizontal
             Container(
               padding:
                   const EdgeInsets.only(left: 15, top: 20, right: 5, bottom: 0),
@@ -110,7 +118,7 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Divider(thickness: 0.5, color: Colors.grey),
-            //Products for you
+            //***Products for you
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
@@ -131,7 +139,7 @@ class HomePage extends StatelessWidget {
               thickness: 0.5,
               color: Colors.grey,
             ),
-            // Grid
+            //***Grid!
             ProductList()
           ],
         ),

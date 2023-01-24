@@ -4,9 +4,7 @@ import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({
-    super.key,
-  });
+  const CategoryScreen({super.key});
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -17,11 +15,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-          centerTitle: true,
-          elevation: 0.0,
-          backgroundColor: Colors.white,
-          title: const Text('Category subitem name')),
+      appBar: AppBar(title: const Text('Category subitem name')),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -39,7 +33,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   color: Colors.black38,
                   child: Center(
                     child: Text('Category Item Name',
-                        style: MyTextStyles.headingSmallWhite),
+                        style: MyTextStyles.headingLargeWhite),
                   ),
                 ),
               ],
@@ -49,7 +43,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
-              height: 800,
+              height: 600,
               child: GridView.builder(
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -59,28 +53,96 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     mainAxisSpacing: 10),
                 itemCount: 20,
                 itemBuilder: ((context, index) => GridTile(
-                      child: InkWell(
-                        onTap: () {},
-                        child: Container(
-                          // height: 400,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              color: Colors.amberAccent,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              // height: 400,
-                              width: 50,
-                              fit: BoxFit.cover,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Column(
+                          children: [
+                            Image.asset(
                               abdul,
+                              fit: BoxFit.fill,
                             ),
-                          ),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Abdul Hameed Khan'),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Rs. 8500',
+                                        style: TextStyle(
+                                          color: Colors.red[400],
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.share_rounded,
+                                        color: Colors.redAccent,
+                                        size: 26,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.pink.shade200.withOpacity(0.3),
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
+                                        child: Text(
+                                          'Free Delivery',
+                                          style: TextStyle(
+                                              color: Colors.black54, fontSize: 12),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 7,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.baseline,
+                                        textBaseline: TextBaseline.alphabetic,
+                                        children: [
+                                          Text(
+                                            '100',
+                                            style: TextStyle(
+                                                color: Colors.red[200],
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
+                                          )
+                                          // ,SizedBox(width: 2,),
+                                          ,
+                                          Text(
+                                            'item',
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 10),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     )),
               ),
-            )
+            ),
           ],
         ),
       ),
