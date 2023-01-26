@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dropshipper/constants/colors.dart';
 import 'package:dropshipper/pages/home/components/category_avatar.dart';
 import 'package:dropshipper/pages/home/components/my_carousal_slider.dart';
 import 'package:dropshipper/pages/home/components/product_list.dart';
@@ -78,18 +79,18 @@ class _HomePageState extends State<HomePage> {
                 height: 5,
               ),
               //***carousal
-              // MyCarousalSlider(),
+              // MyCarousalSlider(), *old doesnt work*
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.orange),
-                    borderRadius: BorderRadius.circular(10)),
+                    color: Color.fromARGB(255, 29, 29, 29),
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(4)),
                 child: CarouselSlider(
                     items: [
                       Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green),
                             borderRadius: BorderRadius.circular(8)),
                         width: double.infinity,
                         child: Image(
