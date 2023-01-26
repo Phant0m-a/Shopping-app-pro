@@ -16,8 +16,9 @@ class ProductList extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       height: 800,
       child: GridView.builder(
-        physics: NeverScrollableScrollPhysics() 
-        // const BouncingScrollPhysics(),
+        physics:
+         NeverScrollableScrollPhysics() 
+        // const BouncingScrollPhysics()
         ,gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           // maxCrossAxisExtent:200,
           //childAspectRatio: 1.3 / 2,
