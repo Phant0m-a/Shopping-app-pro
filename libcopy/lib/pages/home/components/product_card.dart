@@ -6,16 +6,15 @@ import 'package:flutter/material.dart';
 import '../../../model/product/product.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard(
-      {super.key,
-     required this.cardItem});
-   final Product cardItem;
+  const ProductCard({super.key, required this.cardItem});
+  final Product cardItem;
 
   //*todo: two fields are still un-named for now!
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect( borderRadius: BorderRadius.circular(5),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5),
       child: Container(
         // padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         child: Container(
@@ -27,7 +26,7 @@ class ProductCard extends StatelessWidget {
               children: [
                 Image.asset(
                   // abdul,
-                 cardItem.imageSrc,
+                  cardItem.imageSrc,
                   fit: BoxFit.fill,
                 ),
                 Container(
@@ -59,7 +58,7 @@ class ProductCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                            //***checks if delivery is free or not
+                          //***checks if delivery is free or not
                           cardItem.isDeliverfree
                               ? Container(
                                   padding: EdgeInsets.symmetric(
@@ -73,7 +72,7 @@ class ProductCard extends StatelessWidget {
                                         color: Colors.grey, fontSize: 12),
                                   ),
                                 )
-                                //* if delivery not free 
+                              //* if delivery not free
                               : Text(
                                   'Delivery charges applies!',
                                   style: TextStyle(

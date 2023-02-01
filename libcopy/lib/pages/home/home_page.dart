@@ -63,113 +63,109 @@ class _HomePageState extends State<HomePage> {
         // ),
 
         //body
-        SizedBox(
-      height: MediaQuery.of(context).size.height - 100,
-      child: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              MyAppBar(username: 'Ahsan Ali'),
-              //search field
-              myTextField(
-                hintText: 'Search',
-                textController: searchController,
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              //***carousal
-              // MyCarousalSlider(), *old doesnt work*
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 29, 29, 29),
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(4)),
-                child: CarouselSlider(
-                    items: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8)),
-                        width: double.infinity,
-                        child: Image(
-                          image: AssetImage(
-                            'assets/images/abdul.png',
-                          ),
-                          fit: BoxFit.fitWidth,
-                        ),
+        SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          MyAppBar(username: 'Ahsan Ali'),
+          //search field
+          myTextField(
+            hintText: 'Search',
+            textController: searchController,
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          //***carousal
+          // MyCarousalSlider(), *old doesnt work*
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 29, 29, 29),
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(4)),
+            child: CarouselSlider(
+                items: [
+                  Container(
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                    width: double.infinity,
+                    child: Image(
+                      image: AssetImage(
+                        'assets/images/abdul.png',
                       ),
-                    ],
-                    options: CarouselOptions(
-                      height: 180.0,
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                      aspectRatio: 16 / 9,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enableInfiniteScroll: true,
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      viewportFraction: 0.8,
-                    )),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              //***Category Avatars list horizontal
-              Container(
-                padding: const EdgeInsets.only(
-                    left: 15, top: 20, right: 5, bottom: 0),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.redAccent,
-                          radius: 30,
-                          child: Icon(
-                            Icons.category_rounded,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Text('Categories', style: TextStyle(fontSize: 12)),
-                      ],
-                    ),
-                    CategoryAvatar(catName: 'Kids', catIcon: Icons.image),
-                    CategoryAvatar(catName: 'Men', catIcon: Icons.image),
-                    CategoryAvatar(catName: 'Women', catIcon: Icons.image)
-                  ],
-                ),
-              ),
-              SizedBox(height: 15),
-              Divider(thickness: 0.5, color: Colors.grey),
-              //***Products for you
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: 15.0, top: 5, bottom: 5, right: 15),
-                    child: Text(
-                      'Products for you',
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.redAccent),
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                 ],
+                options: CarouselOptions(
+                  height: 180.0,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  aspectRatio: 16 / 9,
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enableInfiniteScroll: true,
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  viewportFraction: 0.8,
+                )),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          //***Category Avatars list horizontal
+          Container(
+            padding:
+                const EdgeInsets.only(left: 15, top: 20, right: 5, bottom: 0),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.redAccent,
+                      radius: 30,
+                      child: Icon(
+                        Icons.category_rounded,
+                        color: Colors.white,
+                        size: 35,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text('Categories', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+                CategoryAvatar(catName: 'Kids', catIcon: Icons.image),
+                CategoryAvatar(catName: 'Men', catIcon: Icons.image),
+                CategoryAvatar(catName: 'Women', catIcon: Icons.image)
+              ],
+            ),
+          ),
+          SizedBox(height: 15),
+          Divider(thickness: 0.5, color: Colors.grey),
+          //***Products for you
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 15.0, top: 5, bottom: 5, right: 15),
+                child: Text(
+                  'Products for you',
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent),
+                ),
               ),
-              Divider(
-                thickness: 0.5,
-                color: Colors.grey,
-              ),
-              //***Grid!
-              ProductList()
             ],
           ),
-        ),
+          Divider(
+            thickness: 0.5,
+            color: Colors.grey,
+          ),
+          //***Grid!
+          ProductList()
+        ],
       ),
     );
   }

@@ -22,7 +22,9 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> tabItems = [
     HomePage(),
     Categories(),
-    Center(child: Text('about'),),
+    Center(
+      child: Text('about'),
+    ),
     Profile(),
   ];
   int? currentIndex;
@@ -46,8 +48,10 @@ class _BottomBarState extends State<BottomBar> {
       child: Scaffold(
         body: Column(
           children: [
-            Center(
-              child: tabItems[currentIndex!],
+            Expanded(
+              child: Center(
+                child: tabItems[currentIndex!],
+              ),
             ),
           ],
         ),
