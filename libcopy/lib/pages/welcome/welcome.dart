@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../constants/colors.dart';
 import '../../constants/styles.dart';
 import 'componets/onboarding.dart';
 import 'package:get/get.dart';
@@ -37,22 +38,24 @@ class _WelcomeState extends State<Welcome> {
             ],
           ),
           const Expanded(child: OnBoarding()),
-          // SizedBox(height: 10,),
-          const Text('Ready to order from your nearest shop'),
-          const SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 20,),
 
-          TextButton(
-            onPressed: () {
+
+          InkWell(
+            onTap: () {
               Get.toNamed(MyRoutes.getPhone());
               // showBottomSheet(context);
             },
-            child: Text('Login', style: MyTextStyles.headingSmallPrimary),
+            child: Container(
+                width: double.infinity  ,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  // borderRadius: BorderRadius.circular(20),
+                  color: primary,
+                ),
+                child: Center(child: Text('Login', style: MyTextStyles.headingSmallWhite))),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+
         ],
       ),
     ));

@@ -121,15 +121,12 @@ class _MyVerifyState extends State<MyVerify> {
                       try{
                         PhoneAuthCredential credential = PhoneAuthProvider.credential(
                             verificationId: MyPhone.verify, smsCode: code);
-
-                        await auth.signInWithCredential(credential);
-
-                        user = (await auth.signInWithCredential(credential)).user!;
-
+                        UserCredential userCredential= await auth.signInWithCredential(credential);
+                        User user = userCredential.user!;
                         createUser(id: user.uid, number: user.phoneNumber);
-                        Get.toNamed(MyRoutes.getDisplayRoute());
+
                       }catch(e){
-                       print('wrong otp');
+                     showSnackBar(context,e.toString());
                       }
 
                     },

@@ -6,7 +6,15 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      // options: const FirebaseOptions(
+      //     // apiKey: "AIzaSyDuFpqEGSP2Do-EGTEz1AFlW5H8Ekv4p8c",
+      //     // authDomain: "dropshipper-d7f37.firebaseapp.com",
+      //     // projectId: "dropshipper-d7f37",
+      //     // storageBucket: "dropshipper-d7f37.appspot.com",
+      //     // messagingSenderId: "205623720674",
+      //     // appId: "1:205623720674:web:722999864083766dff3cbb")
+      );
   runApp(
     const DropShipper(),
   );

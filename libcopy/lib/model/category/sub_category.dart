@@ -15,11 +15,11 @@ class SubCatItem {
 
 List<SubCatItem> subCatItemList1 = [
   SubCatItem(
-      title: 'Abdul',
+      title: 'Sultan Abdul Hameed Khan',
       image: abdul,
       navigator: MyRoutes.getCategoryScreen()),
   SubCatItem(
-      title: 'Abdul',
+      title: 'Sultan Abdul Hameed Khan',
       image: abdul,
       navigator: ''),
   SubCatItem(
@@ -30,7 +30,7 @@ List<SubCatItem> subCatItemList1 = [
 
 List<SubCatItem> subCatItemList2 = [
   SubCatItem(
-      title: 'Abdul',
+      title: 'Sultan Abdul Hameed Khan',
       image: abdul,
       navigator: ''),
   SubCatItem(

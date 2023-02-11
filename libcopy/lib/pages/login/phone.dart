@@ -9,6 +9,7 @@ class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
 
   static String verify="";
+  static String verifyAfterAutoRetrieva='';
 
   @override
   State<MyPhone> createState() => _MyPhoneState();
@@ -120,7 +121,10 @@ class _MyPhoneState extends State<MyPhone> {
                           MyPhone.verify=verificationId;
                           Get.toNamed(MyRoutes.getVerify());
                         },
-                        codeAutoRetrievalTimeout: (String verificationId) {},
+
+                        codeAutoRetrievalTimeout: (String verificationId) {
+                          MyPhone.verifyAfterAutoRetrieva = verificationId;
+                        },
                       );
                       //
                     },

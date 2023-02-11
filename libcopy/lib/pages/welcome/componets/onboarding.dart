@@ -1,8 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-
 import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
+
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
@@ -20,19 +20,19 @@ List<Widget> pages = [
     children: [
       Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-        abdul,
-        fit: BoxFit.cover,
-      ),
-            ),
-          )),
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Image.asset(
+            abdul,
+            fit: BoxFit.cover,
+          ),
+        ),
+      )),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Text(
-          'Set Your Delivery Location',
+          'Make easy Profit',
           style: MyTextStyles.sectionTitleSmallPrimary,
           textAlign: TextAlign.center,
         ),
@@ -43,19 +43,19 @@ List<Widget> pages = [
     children: [
       Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-        abdul,
-        fit: BoxFit.cover,
-      ),
-            ),
-          )),
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Image.asset(
+            abdul,
+            fit: BoxFit.cover,
+          ),
+        ),
+      )),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Text(
-          'Set Your Delivery Location',
+          'Sell Products without owning',
           style: MyTextStyles.sectionTitleSmallPrimary,
           textAlign: TextAlign.center,
         ),
@@ -66,26 +66,25 @@ List<Widget> pages = [
     children: [
       Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-        abdul,
-        fit: BoxFit.cover,
-      ),
-            ),
-          )),
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Image.asset(
+            abdul,
+            fit: BoxFit.cover,
+          ),
+        ),
+      )),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Text(
-          'Set Your Delivery Location',
+          'Make your business',
           style: MyTextStyles.sectionTitleSmallPrimary,
           textAlign: TextAlign.center,
         ),
       ),
     ],
   ),
-
 ];
 
 class _OnBoardingState extends State<OnBoarding> {
@@ -97,7 +96,7 @@ class _OnBoardingState extends State<OnBoarding> {
           child: PageView(
             controller: controller,
             children: pages,
-            onPageChanged: (index){
+            onPageChanged: (index) {
               setState(() {
                 currentPage = index;
               });
