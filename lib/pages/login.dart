@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:dropshop/pages/forgot_password.dart';
 import 'package:dropshop/services/auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,7 +12,7 @@ import 'package:dropshop/pages/home.dart';
 
 class Login extends StatefulWidget {
   final Function()? onTap;
-  Login({Key? key,required this.onTap}) : super(key: key);
+  Login({Key? key, required this.onTap}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -54,9 +55,8 @@ class _LoginState extends State<Login> {
         });
 
     //lets try catch signin
-    try {      print(usernameController.text +' == '+ passwordController.text);
+    try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-  
           email: usernameController.text.trim(),
           password: passwordController.text.trim());
       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
@@ -75,7 +75,6 @@ class _LoginState extends State<Login> {
   }
 
   void random() {
-    print('hello');
     setState(() {
       CircularProgressIndicator();
     });
@@ -83,12 +82,12 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-   
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
           child: Container(
+            height: MediaQuery.of(context).size.height - 30,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -139,10 +138,18 @@ class _LoginState extends State<Login> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'Forgot Password?',
-                          style:
-                              TextStyle(color: Colors.grey[600], fontSize: 16),
+                        MaterialButton(
+                          onPressed: (() {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return ForgotPassword();
+                            }));
+                          }),
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                                color: Colors.grey[600], fontSize: 16),
+                          ),
                         ),
                       ],
                     ),
@@ -152,7 +159,9 @@ class _LoginState extends State<Login> {
                     height: 25,
                   ),
 
-                  MyButton(onTap: signInUser,),
+                  MyButton(
+                    onTap: signInUser,
+                  ),
 
                   SizedBox(
                     height: 50,

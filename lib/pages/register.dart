@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropshop/services/auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +21,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 //controllers
   final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmpasswordController =
       TextEditingController();
@@ -55,23 +57,35 @@ class _RegisterState extends State<Register> {
           );
         });
 
-    //lets try catch signin
+    //lets try catch signup
     if (passwordController.text.trim() ==
         confirmpasswordController.text.trim()) {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: usernameController.text.trim(),
+            email: emailController.text.trim(),
             password: passwordController.text.trim());
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
+           
+    
+    
+        await CreateUserData().then((value) => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Home())));
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
         //wrong password
-        wrongMessage('Email or password incorrect');
+        wrongMessage(e.message.toString());
       }
     } else {
       wrongMessage('Passwords dont match!');
     }
+  }
+
+  Future CreateUserData() async {
+    FirebaseFirestore.instance.collection('Users').add({
+      'email': emailController.text.trim().toString(),
+      'name': usernameController.text.trim().toString(),
+      'address':'',
+      'verified': false
+    });
   }
 
   @override
@@ -95,6 +109,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.grey[300],
         body: SafeArea(
           child: Container(
+            height: MediaQuery.of(context).size.height - 30,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +125,7 @@ class _RegisterState extends State<Register> {
                     color: Colors.black,
                   ),
                   SizedBox(
-                    height:25,
+                    height: 25,
                   ),
 
                   //welcome, you've been missed
@@ -120,11 +135,18 @@ class _RegisterState extends State<Register> {
                   ),
 
                   SizedBox(height: 25),
-                  //username textfieled
+                  //name textfieled
+                  MyTextfield(
+                    obsecuretext: false,
+                    labeltext: 'name',
+                    controller: usernameController,
+                  ),
+                  SizedBox(height: 15),
+                  //emailname textfieled
                   MyTextfield(
                     obsecuretext: false,
                     labeltext: 'Email',
-                    controller: usernameController,
+                    controller: emailController,
                   ),
 
                   SizedBox(height: 15),
@@ -146,7 +168,9 @@ class _RegisterState extends State<Register> {
                     height: 25,
                   ),
 
-                  MyButton(onTap: signUpUser,),
+                  MyButton(
+                    onTap: signUpUser,
+                  ),
 
                   SizedBox(
                     height: 40,
@@ -178,7 +202,7 @@ class _RegisterState extends State<Register> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TileBox(
-                        onPressed: ()=> AuthService().signinWithGoogle(),
+                        onPressed: () => AuthService().signinWithGoogle(),
                         iconD: Icons.gpp_good_sharp,
                       ),
                       SizedBox(
