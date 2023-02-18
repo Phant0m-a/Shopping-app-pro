@@ -1,8 +1,10 @@
 import 'package:dropshop/components/testproduct_card.dart';
 import 'package:dropshop/pages/login.dart';
+import 'package:dropshop/utils/gsheet_api.dart';
 import 'package:flutter/material.dart';
 import 'package:dropshop/pages/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:gsheets/gsheets.dart';
 import 'components/product_card_view.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +15,8 @@ import '../components/product_card.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await gSheetApi().init();
+
   runApp(const MyApp());
 }
 
@@ -334,13 +338,11 @@ class _MyAppState extends State<MyApp> {
     //                         child:
 
     //                           ProductCard(cardItem: productList[index],)
-                              
 
     //                             //  ProductCard(
     //                             //   cardItem: productList[index],
     //                             // ),
-                            
-                            
+
     //                         //     Container(
     //                         //   decoration: BoxDecoration(
     //                         //       border: Border.all(color: Colors.black)),
@@ -360,6 +362,5 @@ class _MyAppState extends State<MyApp> {
     //     ),
     //   ),
     // );
-  
   }
 }

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropshop/pages/components/user_tile.dart';
+import 'package:dropshop/pages/my_projects/my_projects.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class _HomeState extends State<Home> {
   var username;
   var currentUserData;
   List allUserData = [];
-
+  late Map<String, dynamic> newData;
   DateTime dateTime = DateTime.now();
   @override
   void initState() {
@@ -30,14 +32,6 @@ class _HomeState extends State<Home> {
     print("Welcome $username,   It's ${dateTime.toIso8601String()}");
     super.initState();
   }
-// 11 feb 2023
-  //** side navBar
-  //      1. profile. change name or other user-data
-  //      2. favorites. products that you liked!
-  //      3. your products. add/remove/edit/delete your products
-  //      4. other projects. opens up all other projects(including mini ones!)
-  //      5. logout.  logs you out of app
-  // */
 
   //** Home page
   //      Welcome + $username && Quote of the day
@@ -53,6 +47,24 @@ class _HomeState extends State<Home> {
 
 // */
 
+//**
+//18 Feb 2023
+// 1. users list on listTile
+// 2. display name on drawer
+// 3. google sheets api integrated
+// 4. ui for todo ap */
+
+//////additional help
+/**
+ * var collection = FirebaseFirestore.instance.collection('DriverList');
+var querySnapshot = await collection.get();
+for (var queryDocumentSnapshot in querySnapshot.docs) {
+  Map<String, dynamic> data = queryDocumentSnapshot.data();
+  var name = data['name'];
+  var phone = data['phone'];
+} */
+
+  List<String> userIds = [];
   //get user data
   Future getUserData() async {
     print('in get user----------------');
@@ -66,12 +78,24 @@ class _HomeState extends State<Home> {
         .get()
         .then((snapshot) => snapshot.docs.forEach((element) {
               print(element.reference.id);
-              allUserData.add(element.data());
+              userIds.add(element.reference.id);
             }));
 
     // currentUserData = data;
     // print(data);
     // return data;
+  }
+
+  Future getAllUserData() async {
+    var temp = await FirebaseFirestore.instance
+        .collection('Users')
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((doc) {
+              // print(doc.data());
+              allUserData.add(doc.data());
+            }));
+
+    return temp;
   }
 
   @override
@@ -98,7 +122,7 @@ class _HomeState extends State<Home> {
                             ),
                             radius: 30,
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: 4),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -114,7 +138,7 @@ class _HomeState extends State<Home> {
                                     color: Colors.white),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ],
@@ -131,9 +155,15 @@ class _HomeState extends State<Home> {
                 leading: Icon(Icons.add_box_outlined),
                 title: Text('Products'),
               ),
-              ListTile(
-                leading: Icon(Icons.personal_injury_outlined),
-                title: Text('My Projects'),
+              GestureDetector(
+                onTap: (() {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => MyProjects())));
+                }),
+                child: ListTile(
+                  leading: Icon(Icons.personal_injury_outlined),
+                  title: Text('My Projects'),
+                ),
               ),
               GestureDetector(
                 onTap: () {
@@ -164,9 +194,9 @@ class _HomeState extends State<Home> {
             children: [
               Column(
                 children: [
-                  Center(
-                    child: Text(user.toString()),
-                  ),
+                  // Center(
+                  //   child: Text(user.toString()),
+                  // ),
                   SizedBox(height: 25),
                   Divider(thickness: 1),
                   // Container(
@@ -233,29 +263,22 @@ class _HomeState extends State<Home> {
                   //   ),
 
                   // ),
+
+                  //========================== all user container
                   Container(
-                    height: 100,
+                    height: MediaQuery.of(context).size.height - 100,
                     child: FutureBuilder(
                       future: getUserData(),
                       builder: (context, snapshot) {
                         return ListView.builder(
-                            itemCount: allUserData.length,
+                            itemCount: userIds.length,
                             itemBuilder: (context, index) {
-                              return ListTile(
-                                leading: Icon(
-                                  Icons.verified,
-                                  color: Colors.blueAccent,
-                                ),
-                                // title: Text(allUserData[index].displayName
-                                //     ? allUserData[index].displayName
-                                //     : "not set"),
-                                trailing:
-                                    Text(allUserData[index].toString()),
-                              );
+                              return UserTile(documentId: userIds[index]);
                             });
                       },
                     ),
-                  )
+                  ),
+                  //-=====================================
                 ],
               ),
             ],
