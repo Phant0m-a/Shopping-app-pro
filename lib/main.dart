@@ -1,5 +1,6 @@
 import 'package:dropshop/components/testproduct_card.dart';
 import 'package:dropshop/pages/login.dart';
+import 'package:dropshop/pages/my_projects/components/todo/todo.dart';
 import 'package:dropshop/utils/gsheet_api.dart';
 import 'package:flutter/material.dart';
 import 'package:dropshop/pages/auth.dart';
@@ -16,7 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await gSheetApi().init();
-
+  await gSheetApi().getCurrentTodo();
   runApp(const MyApp());
 }
 
@@ -52,7 +53,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // return const Auth();
-    return MaterialApp(home: Auth());
+    // return MaterialApp(home: Auth());
+    return MaterialApp(
+      home: Todo(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+    );
     var wDefaultPadding = 10;
     // return MaterialApp(
     //   home: Scaffold(

@@ -1,41 +1,71 @@
 import 'package:gsheets/gsheets.dart';
 
-class gSheetApi{
+class gSheetApi {
+//numberofTodo
+  static int numberofTodo = 0;
+
+//list of current-Todo
+  static List<String> currentTodo = [];
 
 //gsheet creds
-static const _credentials = r'''
-{
+  static const _credentials = r'''{
   "type": "service_account",
   "project_id": "gsheets-378105",
-  "private_key_id": "dcaadbe2202b59862635722689788aec27c5069a",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEvrOjFamVl45e\n9yu4y6fmHGI9RQuwWSfByKviF16k/p6fhYmxgwg7PCTN5wbEYRq6qUr8b9uzoeoR\nymj4pEPUeNOSP8mZ4a7f09xXjTRZqOHgi1kptziO1yDCl0z+WDmPI1tBg6vSruR6\nzCkXhDMTYCKa2ut/xdsqW8TSyEdQOWShtJybWxnADMBfb5KMTX+tILLMHCjpFukN\njAC+4e/aOoCx+4SS5lIqZj8bQSh9+qzknhRj/2zaDEV5aaOXDTTWWnZrwYswnt6L\nBua/3YTl18yX6FwYProAugaR7P7Fz6II2G1zYXFRu6PLjk8eYCyso1BVTNrkr3uQ\nmyZdarBtAgMBAAECggEAEcdi38ykFbzLlIjU9l7O9hQgC4XbA81WsqQB5k0y1Amf\nR26Pjg83dfTeJY4oNiRJQE9uk4e/LIkn6AIowLlFWOSvR8LEYse6YAca3P2JWsXQ\nXZRyEvs33O6TSwpVnpFV6DmrdCzkIMaFppQe7X1YiTpxfhlk2RfF0ZrX2y1Whmj0\ntCfZRhssTzt/YMEsNzP8iNZH170DYqdts1yK0w1TzWEyiXPGNaKZRPA4WBDv3wEK\n46h8GkhPSeM5fA+NjUx1fAE6rKM3SnZovJhJNUnNa308TC4NRoM+zJ+i7I3lncwe\n+B+KrcewUcfH8OmxlYllAUI8jgzyP+bfltyNXi40cQKBgQDrPzxGhW8NglXvum2w\nZ5gYbX1fssYMUvLXkRxGG4S62PVDEiQLuj0DcvDudVTj9zU/4xaDNjpVUQSkBqBj\nWjTrUlxr3v3tIcpqFZGTZ5BZtSL+PmqkWD0CO9UfH6arSZD2seZgsxV1fqGXG4it\nhIrudpXL9HO6gKUJkzdwuo8rkQKBgQDWGfGqir6sksr2+dDw6+kf7pW7mVZSjEWI\nOnj+QGlOWTnrPQiJzlPfsqDMwDFTQi9NvotTzojBSgw6ocLhgzT0BnwgRu+akglH\nwFZDynaHHDtOAIPj7M92yIRl7jw/NBxQZsbf8YbuEasQ4g0cEDXleH4nElZfwc4k\n7YeqEBwxHQKBgDBB9Jdy3+khh4d58u5xEd5Q95seDUqR6YcXGXm4Q24g+48atZJC\nTina9lm0cAmjuKS2bPPVt/mweQc85MH8y0ZKyvLF98khWWiRrB9U62O7qMYG/9Fe\n2IUQyRNtZr9UhAxXSi8kDY7gvz1ERLFzsxxf7zK7ntHveeuQ65qQarZBAoGBAILg\nrSgxVEmuGkBLifwcWg/ZCtL48xnXAZI7HEdgHH92b79rOdLzu7XdPgqr2fspVD1U\nI1uBv3tYxoz44WZ1jGM3q50Xf9SfPOkNnC4oj7gb++y8x+MGmfPks3qT3WRNeJl1\nmlC/FlpllorlhFoJVskFlShRP1ed42QTh4DgBDvJAoGAVU3g+YIXsNawjjqLNVkQ\ngJQNvYoWKg7TlKg2qlR+c+nDg/qxNGy0V21oNw7/qKufTC7LMGWg+KgZrx+w3fAD\nK7MjDtI8a3f00IZedCUarmOyDLULIzZN6vATX9kitgtrZE3ZLrOl7DmbVhKhd0+J\nNARTOgqGkuB/5bp/G3IXe7s=\n-----END PRIVATE KEY-----\n",
+  "private_key_id": "7ae6d927c720d0b6279ec368f9afec0a83f4937d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCJMEWgz91aQoa3\npRD+CVg5JNdtiFqtj4LSO2bCsK1Lg5l7L9Ll9uPzMgOsThLVkItazWzo+bhQMgkc\n1vDXHe5GdkwOvI/+tx2UHiLzJrbHr78fFkQuNDt6KmdTSt0yuBznqX2usKveoTpb\n2r5JE4qhe92B22ke1qaXbNgXN2Ev5zY/Hgvd6UDw9wtoccMVLX4Z9JoaJrvB2qVS\nQ89CmbuH66ZE6RcHCVeRm5bo4jhhA+NRN9F14raDMwoJ8u80M2SKnADrMMpBV31r\nIpa/uSnihl9vKoAXaCDq7zauNtqR60vdtk6jG6N58PU4kWrBe24OkaxuH9YX/6w2\nsJzQ9igPAgMBAAECggEAI1FyG3xoGByYYh70yPHO7Kc3btNzxMr1evof8m9Zrd8r\nXDNrsBhnhuyRVYKkBqc3uSC5sSDY+oxnHC2Zw0fJWAqMeh7BU2oBC2jWxpJo6++q\n3G33D44S4diY0TCs0ankhx9zY83H8YDAbXVbF6UYQ4qH9C5wWagZK1KyLwfq1VHo\nfxWPonvEO/0MSmbKebw/TVHcKV9MKcXZPXgwwTIY+CfqLEZgCp2KrOiQ8H/H4kyL\nTH/bzM3kyzRxYjeaNThEY9mzfAdVZFFHgNMKz1xl7yCCMsJuIGiOtv3sMYtZoUeB\n0AbLShCGS+SSYbxQp6C84j3m4SQZlR032XlpKfyawQKBgQC7bTfk0Z6uUaEUmQpg\nIdk/kPM3GzobXRRg6t4FfJYIOB4SDGLP/7DYl7bM8IXxRihh+qizce/CCGMgarJB\nkLhC6ppJ6Mi3SneIawDIJQfsgeqH08FIa+2UryIqzUktU0nvWpwZwvTseweC/M0Q\nNXjLe37wtPYLDcpNpr8rYHZlrQKBgQC7YaXWkcM/mV5V3NSuFF10KdKCgblwjUlR\nGVNdWycco6qVvDfrPzggn4jP5t7CpI/MN2/LpV1ijxCKehgRlhdULg46QrKVJ5H4\nXguJ3TkcL5fRALJmHfbb3mLJXjRGPYVGTkp3n8JyGotHKuoRaeFOpw8yNYmGMkiY\nHk7egznkKwKBgE2DffpENzwgxl2ebYwUc6S2bd/8gquOcz8h43ChdeswSj9sn/El\n7h2loRRg5QRD36+l2t9b36x/i398oPw8vffuzqCChYBIa+cfWdNsfTpzAGvsR6OL\n/1XemGLbQ8hbCdjTwHtnBaRHvXOO2cA6XRrKmFU0gg1QRrqWm7l0y4KBAoGATNH3\nn0Qa+9PwrNrgBo4q0hjjSMXONKp3yFvNpZRdMIyYvtJvSm6coCNHf5Ry9vFoUpzX\npHGjG2jzqxHrFCqoXcaT5qa5eBTE70H/EQI1C60nXHQgr2TRc8p0TYHlhHZsUSp/\ntRM2MHlZaE/brk/uIsSyoi74tp+ey16Bjw/ViAkCgYAhWSo9psL/PYxaqE+RdfeL\nL6Qr/o0Hg+Ncet1WCLq6q6MsYy4bgTuKv6zC/wLxEJBdlGUCgdQjuKMRlI9V8CxA\nTPDjFP5FA1P8aYgRvXgmKVWjUhCqQN8aH8wuJqY217srkg/0Paf3C++V2frltmet\nJO9CV/9tMjink2AXRROxLA==\n-----END PRIVATE KEY-----\n",
   "client_email": "flutter-expenditures@gsheets-378105.iam.gserviceaccount.com",
   "client_id": "102718705051172776437",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/flutter-expenditures%40gsheets-378105.iam.gserviceaccount.com"
-}
+}''';
 
-
-''';
- //googlesheed id
-  static const _gSheetsId = '1ZgY0zGdQv4JStSUdLfc_K5iAkK4Zwdw34JJQXoLua7s';
+//googlesheed id
+  static final _gSheetsId = '1-nW5Z2RCEicRlSty0n2paQGKXyYu1Bqa_nMfIxd_pLc';
 
 //init gsheet
   static final _gsheets = GSheets(_credentials);
+  static Worksheet? _workSheet;
 
-
-Future init()async{
- 
+  Future init() async {
 //fetch the spreadsheet by its id
-  final excelSheet = await _gsheets.spreadsheet(_gSheetsId);
+    final excelSheet = await _gsheets.spreadsheet(_gSheetsId);
 
 //fetch worksheet by its title {mine is 2023}
-  var _workSheet = excelSheet.worksheetByTitle('home_expenses');
+    _workSheet = excelSheet.worksheetByTitle('Sheet1');
 // insert data into excelsheet
-//  workSheet!.values.insertValue('hello world', column: 1, row: 1);
-  
-}
+    _workSheet!.values.insertValue('test is working though', column: 1, row: 1);
+    getCurrentTodo();
+  }
 
+  static Future postNew(String note) async {
+    if (_workSheet == null) return print('error------------------------------');
+    numberofTodo++;
+    currentTodo.add(note);
+    await _workSheet!.values.appendRow([note]);
+  }
+
+//count notes and load notes
+  Future getCurrentTodo() async {
+    while (await _workSheet!.values.value(column: 1, row: numberofTodo + 1) !=
+        '') {
+      //if not empty then keep incrementing the numberofTodo
+      numberofTodo++;
+    }
+
+    //after counting...load the todo!
+    loadTodo();
+  }
+
+//loadAllTodos
+  Future loadTodo() async {
+    for (var i = 0; i < numberofTodo; i++) {
+      String newTodo = await _workSheet!.values.value(column: 1, row: i + 1);
+
+      if (currentTodo.length < numberofTodo) {
+        currentTodo.add(newTodo);
+      }
+    }
+  }
 }
