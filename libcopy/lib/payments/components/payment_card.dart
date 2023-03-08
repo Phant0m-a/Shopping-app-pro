@@ -19,7 +19,7 @@ class PaymentCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.only(left: 10),
+          padding: EdgeInsets.only(left: 10,top:5,bottom: 5),
           decoration:
               BoxDecoration(border: Border.all(color: Colors.grey.shade200)),
           child: Column(
